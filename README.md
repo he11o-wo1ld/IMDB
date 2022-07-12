@@ -33,5 +33,9 @@ Movie
 ## Start server
 ```uvicorn main:app --reload```
 
+## Run Test Case
+```pytest```
+
 # Sweager UI:
 http://127.0.0.1:8000/docs
+
