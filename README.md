@@ -1,6 +1,12 @@
 # IMDB
 Movie
 
+## Clone Project
+```git clone https://github.com/he11o-wo1ld/IMDB.git```
+
+## Go to Project directory
+```cd IMDB```
+```cd API```
 
 ## Create Virtual Environment
 ### For MAC
