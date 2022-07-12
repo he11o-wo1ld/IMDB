@@ -2,17 +2,17 @@
 Movie
 
 
-# Create Virtual Environment
-# For MAC
-python3 -m venv venv
+## Create Virtual Environment
+### For MAC
+'''python3 -m venv venv'''
 
-# For Windows
-python -m venv venv
+### For Windows
+'''python -m venv venv'''
 
 
-# Activate the virtual environment
-# For MAC
-source venv/bin/activate
+## Activate the virtual environment
+### For MAC
+'''source venv/bin/activate'''
 
 # For Windows
 source venv/Scripts/activate
