@@ -34,6 +34,13 @@ def posts(db: Session = Depends(get_db)):
   movies = db.query(models.DbPost).all()
   return movies
 
+@router.get('/movie/{id}', status_code=status.HTTP_200_OK)
+def get_movie_by_id(id:int, db:Session = Depends(get_db)):
+    movie = db.query(models.DbPost).filter(models.DbPost.id == id).first()
+    if movie is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Movie with id : {id} not found")
+    return movie
+
 
 @router.get('/get_movie/{id}', status_code=status.HTTP_200_OK)
 def get_movie_by_id(id: int, db: Session = Depends(get_db)):
@@ -75,21 +82,6 @@ def upload_image(image: UploadFile = File(...), current_user: UserAuth = Depends
   return {'filename': path}
 
 
-@router.put('/update/{id}', status_code=status.HTTP_200_OK, response_model=UpdatePost)
-def update_movie(id: int, Post: UpdatePost, db: Session = Depends(get_db), 
-current_user: UserAuth = Depends(get_current_user)):
-      update_post = db.query(models.DbPost).filter(models.id==id)
-      update = update_post.first()
-      if update == None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post does not exist")
-      update_post.update(Post.dict(), synchronize_session=False)
-
-
-@router.delete('/delete/{id}')
-def delete(id: int, db: Session = Depends(get_db), current_user: UserAuth = Depends(get_current_user)):
-  return db_post.delete(db, id, current_user.id)
-
-
 @router.get('/movie/{caption}')
 def get_movie_by_caption(caption: str, db: Session = Depends(get_db)):
       movie_caption = db.query(models.DbPost).filter(models.DbPost.caption == caption).all()
@@ -129,3 +121,16 @@ def get_movie_by_imdb_score(imdb_score: float, db: Session = Depends(get_db)):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Movie Does Not Exist with Director {imdb_score}")
       return movie_score
 
+
+@router.put('/update/{id}', status_code=status.HTTP_200_OK, response_model=PostDisplay)
+def update_movie(id: int, Post: PostDisplay, db: Session = Depends(get_db), current_user: UserAuth = Depends(get_current_user)):
+      update_post = db.query(models.DbPost).filter(models.id==id)
+      update = update_post.first()
+      if update == None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post does not exist")
+      update_post.update(Post.dict(), synchronize_session=False)
+
+
+@router.delete('/delete/{id}')
+def delete(id: int, db: Session = Depends(get_db), current_user: UserAuth = Depends(get_current_user)):
+  return db_post.delete(db, id, current_user.id)
