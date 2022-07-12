@@ -4,7 +4,7 @@ Movie
 
 ## Create Virtual Environment
 ### For MAC
-'''python3 -m venv venv'''
+```python3 -m venv venv```
 
 ### For Windows
 '''python -m venv venv'''
