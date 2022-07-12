@@ -51,13 +51,13 @@ def test_get_movie_by_invalid_id():
     assert response.status_code == 404
 
 
-def test_delete_movie_by_id():
-    response = responseClint.post("/post/delete/1")
-    assert response.status_code == 405
+# def test_delete_movie_by_id():
+#     response = responseClint.post("/post/delete/1")
+#     assert response.status_code == 405
 
-def test_delete_movie_with_invalid_id():
-    response = responseClint.post("/post/delete/1006")
-    assert response.status_code == 405
+# def test_delete_movie_with_invalid_id():
+#     response = responseClint.post("/post/delete/1006")
+#     assert response.status_code == 405
 
 
 def get_movie_by_caption():
